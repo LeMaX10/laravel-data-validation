@@ -112,9 +112,9 @@ class InnRule implements Rule
     protected function checkDigits(string $value, array $coeffs)
     {
         $result = 0;
-        foreach ($coeffs as $key => $i) {
-            $digit = (int) $value{$i};
-            $result += $key * $digit;
+        foreach ($coeffs as $key => $dig) {
+            $digit = (int) $value{$key};
+            $result += $dig * $digit;
         }
 
         return $result % 11 % 10;

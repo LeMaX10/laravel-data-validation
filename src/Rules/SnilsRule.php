@@ -1,6 +1,7 @@
 <?php namespace LeMaX10\DataValidation\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
 use LeMaX10\Exceptions\ValidationErrorException;
 
@@ -68,7 +69,7 @@ class SnilsRule implements Rule
      */
     public function message()
     {
-        // TODO: Implement message() method.
+        return Lang::get('validation.'. $this->messageCode);
     }
 
     /**
