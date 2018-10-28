@@ -21,6 +21,11 @@ class SnilsRule implements Rule
      */
     protected $length = '11';
 
+    public function validate($attribute, $value)
+    {
+        return $this->passes($attribute, $value);
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -46,7 +51,7 @@ class SnilsRule implements Rule
             }
 
             if(!$this->checkDigit($snilsString)) {
-                throw new ValidationErrorException('controlDigit');
+                throw new ValidationErrorException('snils');
             }
 
             return true;

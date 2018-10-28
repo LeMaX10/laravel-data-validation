@@ -22,6 +22,11 @@ class InnRule implements Rule
      */
     protected $length = [10, 12];
 
+    public function validate($attribute, $value)
+    {
+        return $this->passes($attribute, $value);
+    }
+
     /**
      * Determine if the validation rule passes.
      *
@@ -48,7 +53,7 @@ class InnRule implements Rule
             }
 
             if(($length === 10 && !$this->validateTenDigitInn($innString)) || !$this->validateOtherInn($innString)) {
-                throw new ValidationErrorException('controlDigit');
+                throw new ValidationErrorException('inn');
             }
 
             return true;
