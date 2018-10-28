@@ -1,4 +1,4 @@
-<?php namespace LeMaX10\Exceptions;
+<?php namespace LeMaX10\DataValidation\Exceptions;
 
 
 use Throwable;

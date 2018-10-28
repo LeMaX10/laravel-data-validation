@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use LeMaX10\Exceptions\ValidationErrorException;
+use LeMaX10\DataValidation\Exceptions\ValidationErrorException;
 
 /**
  * Class SnilsRule
