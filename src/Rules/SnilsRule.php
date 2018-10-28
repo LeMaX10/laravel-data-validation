@@ -20,7 +20,7 @@ class SnilsRule implements Rule
     /**
      * @var array
      */
-    protected $length = '11';
+    protected $length = 11;
 
     public function validate($attribute, $value)
     {
@@ -111,6 +111,6 @@ class SnilsRule implements Rule
      */
     protected function getControlDigit(string $value)
     {
-        return Str::substr($value, -2);
+        return (int) Str::substr($value, -2);
     }
 }

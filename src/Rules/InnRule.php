@@ -117,6 +117,6 @@ class InnRule implements Rule
             $result += $dig * $digit;
         }
 
-        return $result % 11 % 10;
+        return (int) $result % 11 % 10;
     }
 }
