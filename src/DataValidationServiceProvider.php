@@ -7,13 +7,10 @@ use LeMaX10\DataValidation\Rules\SnilsRule;
 
 class DataValidationServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        $this->loadTranslationsFrom(__DIR__ .'/lang/', 'DataValidation');
-    }
-
     public function boot()
     {
+        $this->loadTranslationsFrom(__DIR__ .'/lang/', 'DataValidation');
+
         Validator::extend('inn', InnRule::class);
         Validator::extend('snils', SnilsRule::class);
     }
