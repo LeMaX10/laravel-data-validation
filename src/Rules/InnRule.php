@@ -70,7 +70,7 @@ class InnRule implements Rule
      */
     public function message()
     {
-        return Lang::get('validation.data-validation.'. $this->messageCode);
+        return trans('DataValidation::validation.inn.'. $this->messageCode);
     }
 
     /**

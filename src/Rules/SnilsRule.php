@@ -69,7 +69,7 @@ class SnilsRule implements Rule
      */
     public function message()
     {
-        return Lang::get('validation.'. $this->messageCode);
+        return trans('DataValidation::validation.snils.'. $this->messageCode);
     }
 
     /**
