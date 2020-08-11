@@ -22,6 +22,11 @@ class SnilsRule implements Rule
      */
     protected $length = 11;
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @return bool
+     */
     public function validate($attribute, $value)
     {
         return $this->passes($attribute, $value);
@@ -112,5 +117,13 @@ class SnilsRule implements Rule
     protected function getControlDigit(string $value)
     {
         return (int) Str::substr($value, -2);
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'snils';
     }
 }

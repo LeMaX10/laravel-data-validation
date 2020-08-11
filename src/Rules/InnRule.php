@@ -22,6 +22,11 @@ class InnRule implements Rule
      */
     protected $length = [10, 12];
 
+    /**
+     * @param $attribute
+     * @param $value
+     * @return bool
+     */
     public function validate($attribute, $value)
     {
         return $this->passes($attribute, $value);
@@ -118,5 +123,13 @@ class InnRule implements Rule
         }
 
         return (int) $result % 11 % 10;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return 'inn';
     }
 }
