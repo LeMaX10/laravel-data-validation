@@ -52,12 +52,7 @@ class InnRule implements Rule
                 throw new ValidationErrorException('onlyDigits');
             }
 
-            $length = Str::length($innString);
-            if (!in_array($length, $this->length, true)) {
-                throw new ValidationErrorException('length');
-            }
-
-            if(($length === 10 && !$this->validateTenDigitInn($innString)) || !$this->validateOtherInn($innString)) {
+            if (!$this->validateValue($innString)) {
                 throw new ValidationErrorException('inn');
             }
 
@@ -80,6 +75,27 @@ class InnRule implements Rule
 
     /**
      * @param string $value
+     * @return bool
+     * @throws ValidationErrorException
+     */
+    protected function validateValue(string $value): bool
+    {
+        $length = Str::length($value);
+        if (!in_array($length, $this->length, true)) {
+            throw new ValidationErrorException('length');
+        }
+
+        if ($length === 10) {
+            return $this->validateTenDigitInn($value);
+        } else if ($length === 12) {
+            return $this->validateTwelvyDigitInn($value);
+        }
+
+        return false;
+    }
+
+    /**
+     * @param string $value
      *
      * @return bool
      */
@@ -96,7 +112,7 @@ class InnRule implements Rule
      *
      * @return bool
      */
-    protected function validateOtherInn(string $value)
+    protected function validateTwelvyDigitInn(string $value)
     {
         $coefficientFirst = [7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
         $coefficientSecond = [3, 7, 2, 4, 10, 3, 5, 9, 4, 6, 8];
