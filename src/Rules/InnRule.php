@@ -57,7 +57,7 @@ class InnRule implements Rule
                 throw new ValidationErrorException('length');
             }
 
-            if(($length === 10 && !$this->validateTenDigitInn($innString)) || !$this->validateOtherInn($innString)) {
+            if(($length === 10 && !$this->validateTenDigitInn($innString)) || ($length === 12 && !$this->validateOtherInn($innString))) {
                 throw new ValidationErrorException('inn');
             }
 
