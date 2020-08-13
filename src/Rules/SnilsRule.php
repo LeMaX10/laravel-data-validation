@@ -1,9 +1,10 @@
-<?php namespace LeMaX10\DataValidation\Rules;
+<?php declare(strict_types=1);
+namespace LeMaX10\DataValidation\Rules;
 
+use Exception;
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Support\Facades\Lang;
 use Illuminate\Support\Str;
-use LeMaX10\DataValidation\Exceptions\ValidationErrorException;
 
 /**
  * Class SnilsRule
@@ -13,21 +14,21 @@ use LeMaX10\DataValidation\Exceptions\ValidationErrorException;
 class SnilsRule implements Rule
 {
     /**
-     * @var
+     * @var string
      */
     protected $messageCode;
 
     /**
-     * @var array
+     * @var int
      */
     protected $length = 11;
 
     /**
-     * @param $attribute
-     * @param $value
+     * @param string $attribute
+     * @param mixed $value
      * @return bool
      */
-    public function validate($attribute, $value)
+    public function validate(string $attribute, $value): bool
     {
         return $this->passes($attribute, $value);
     }
@@ -40,28 +41,28 @@ class SnilsRule implements Rule
      *
      * @return bool
      */
-    public function passes($attribute, $value)
+    public function passes(string $attribute, $value): bool
     {
         try {
             $snilsString = trim($value);
             if(empty($snilsString)) {
-                throw new ValidationErrorException('empty');
+                throw new Exception('empty');
             }
 
             if (preg_match('/[^0-9]/', $snilsString)) {
-                throw new ValidationErrorException('onlyDigits');
+                throw new Exception('onlyDigits');
             }
 
             if(Str::length($snilsString) !== $this->length) {
-                throw new ValidationErrorException('snilsLength');
+                throw new Exception('snilsLength');
             }
 
             if(!$this->checkDigit($snilsString)) {
-                throw new ValidationErrorException('snils');
+                throw new Exception('snils');
             }
 
             return true;
-        } catch (ValidationErrorException $e) {
+        } catch (Exception $e) {
             $this->messageCode = $e->getMessage();
             return false;
         }
@@ -72,7 +73,7 @@ class SnilsRule implements Rule
      *
      * @return string
      */
-    public function message()
+    public function message(): string
     {
         return trans('DataValidation::validation.snils.'. $this->messageCode);
     }
@@ -97,7 +98,7 @@ class SnilsRule implements Rule
      *
      * @return bool
      */
-    protected function checkDigit(string $value)
+    protected function checkDigit(string $value): bool
     {
         $sum = $this->calcSum($value);
 
@@ -112,9 +113,9 @@ class SnilsRule implements Rule
     /**
      * @param string $value
      *
-     * @return string
+     * @return int
      */
-    protected function getControlDigit(string $value)
+    protected function getControlDigit(string $value): int
     {
         return (int) Str::substr($value, -2);
     }
@@ -122,7 +123,7 @@ class SnilsRule implements Rule
     /**
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
         return 'snils';
     }
