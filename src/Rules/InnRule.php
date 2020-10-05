@@ -28,7 +28,7 @@ class InnRule implements Rule
      * @param mixed $value
      * @return bool
      */
-    public function validate(string $attribute, $value): bool
+    public function validate($attribute, $value): bool
     {
         return $this->passes($attribute, $value);
     }
@@ -41,7 +41,7 @@ class InnRule implements Rule
      *
      * @return bool
      */
-    public function passes(string $attribute, $value): bool
+    public function passes($attribute, $value): bool
     {
         try {
             $innString = trim($value);
